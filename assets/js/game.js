@@ -64,52 +64,6 @@ var fight = function(enemy) {
     }
   };
 
-  var playerInfo = {
-    name: window.prompt("What is your robot's name?"),
-    health: 100,
-    attack: 10,
-    money: 10,
-    reset: function() {
-      this.health = 100;
-      this.money = 10;
-      this.attack = 10;
-    },
-    refillHealth: function() {
-      if (this.money >= 7) {
-        window.alert("Refilling player's health by 20 for 7 dollars.");
-      this.health += 20;
-      this.money -= 7;
-      }
-      else {
-        window.alert("You don't have enough money!");
-      }
-    },
-    upgradeAttack: function() {
-      if (this.money >=7) {
-        window.alert("Upgrading player's attack by 6 for 7 dollars.");
-      this.attack += 6;
-      this.money -= 7;
-    }
-    else {
-      window.alert("You don't have enough money!");
-    }
-  };
-  
-  var enemyInfo = [
-    {
-      name: "Roborto",
-      attack: randomNumber(10, 14)
-    },
-    {
-      name: "Amy Android",
-      attack: randomNumber(10, 14)
-    },
-    {
-      name: "Robo Trumble",
-      attack: randomNumber(10, 14)
-    }
-  ];
-
 // function to start a new game
 var startGame = function() {
     // reset player stats
@@ -180,28 +134,10 @@ var shop = function() {
     case "refill":
       playerInfo.refillHealth();
       break;
-
-      // increase health and decrease money
-      playerInfo.health = playerInfo.health + 20;
-      playerInfo.money = playerInfo.money - 7;
-      }
-      else {
-        window.alert("You don't have enough money!");
-      }
-      break;
       case "UPGRADE": // new case
       case "upgrade":
         playerInfo.upgradeAttack();
         break;
-
-      // increase attack and decrease money
-      playerInfo.attack = playerInfo.attack + 6;
-      playerInfo.money = playerInfo.money - 7;
-      }
-      else {
-        window.alert("You don't have enough money!");
-      }
-      break;
       case "LEAVE": // new case
       case "leave":
       window.alert("leaving the store.");
@@ -215,6 +151,62 @@ var shop = function() {
         break;
   }
 };
+/* End Game Funtions */
+
+/* Game Information / Variables */
+var playerInfo = {
+  name: window.prompt("What is your robot's name?"),
+  health: 100,
+  attack: 10,
+  money: 10,
+  reset: function() {
+    this.health = 100;
+    this.money = 10;
+    this.attack = 10;
+  },
+  refillHealth: function() {
+    if (this.money >= 7) {
+      window.alert("Refilling player's health by 20 for 7 dollars.");
+    this.health += 20;
+    this.money -= 7;
+    }
+    else {
+      window.alert("You don't have enough money!");
+    }
+  },
+  upgradeAttack: function() {
+    if (this.money >=7) {
+      window.alert("Upgrading player's attack by 6 for 7 dollars.");
+    this.attack += 6;
+    this.money -= 7;
+  }
+  else {
+    window.alert("You don't have enough money!");
+  }
+};
+
+var enemyInfo = [
+  {
+    name: "Roborto",
+    attack: randomNumber(10, 14)
+  },
+  {
+    name: "Amy Android",
+    attack: randomNumber(10, 14)
+  },
+  {
+    name: "Robo Trumble",
+    attack: randomNumber(10, 14)
+  }
+];
+
+console.log(enemyNames);
+console.log(enemyNames.length);
+console.log(enemyNames[0]);
+console.log(enemyNames[1]);
+console.log(enemyNames[2]);
+
+/* End Game Information / Variables */
 
 // start first game when page loads
 startGame();
