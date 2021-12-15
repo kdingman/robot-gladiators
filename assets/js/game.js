@@ -24,20 +24,16 @@ var fightOrSkip = function() {
     if(confirmSkip) {
       window.alert(playerInfo.name + "has decided to skip this fight. Goodbye!");
       // subtract money from playerMoney for skipping
-      playerInfo.playerMoney = playerInfo.money - 10;
+      playerInfo.playerMoney = Math.max(0, playerInfo.money -10);
+      // stop while() loop using break; and enter next fight
 
       // return true if player wants to leave
       return true; 
       shop();
     }
   }
-}
-
-// keep track of who goes first
-var isPlayerTurn = true;
-if(Math.random() > 0.5) {
-  isPlayerTurn = false;
-}
+  return false;
+};
 
 var fight = function(enemy) {
   // keep track of who goes first
@@ -56,7 +52,7 @@ var fight = function(enemy) {
         break;
       }
 
-      var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
 
       // remove enemy's health by subtracting the amount we set in the damage variable
       enemy.health = Math.max(0, enemy.health - damage);
@@ -119,6 +115,8 @@ var startGame = function() {
 playerInfo.reset();
     
 for(var i = 0; i < enemyInfo.length; i++) {
+  // check players stats
+  console.log(playerInfo);
   
     if(playerInfo.health > 0) {
         window.alert("Welcome to Robot Gladiators! Round" + (i + 1));
@@ -128,6 +126,8 @@ for(var i = 0; i < enemyInfo.length; i++) {
 
     // reset enemy.health before starting new fight
     pickedEnemyObj = randomNumber(40, 60); 
+
+    console.log(pickedEnemyObj);
 
     fight(pickedEnemyObj);
     // if player is still alive and we're not at the last enemy in the array
@@ -208,7 +208,6 @@ var shop = function() {
 };
 /* End Game Funtions */
 
-/* Game Information / Variables */
 // function to set name
 var getPlayerName = function() {
   var name = "";
@@ -221,6 +220,7 @@ var getPlayerName = function() {
   return name;
 };
 
+/* Game Information / Variables */
 var playerInfo = {
   name: getPlayerName(),
   health: 100,
@@ -251,6 +251,7 @@ var playerInfo = {
     window.alert("You don't have enough money!");
   }
 }
+};
 
 var enemyInfo = [
   {
@@ -266,13 +267,6 @@ var enemyInfo = [
     attack: randomNumber(10, 14)
   }
 ];
-
-console.log(enemyNames);
-console.log(enemyNames.length);
-console.log(enemyNames[0]);
-console.log(enemyNames[1]);
-console.log(enemyNames[2]);
-
 /* End Game Information / Variables */
 
 // start first game when page loads
