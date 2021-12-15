@@ -5,9 +5,50 @@ var randomNumber = function(min, max) {
   return value;
 };
 
+var fightOrSkip = function() {
+  // ask player if they'd like to fight or skip using fightOrSkip function
+  var promptFight = window.prompt('Would you like to  FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+
+  // Conditional Recursive Function Call
+  if(promptFight === "" || promptFight === null) {
+    window.alert("You need to provide a valid answer! Please try again.");
+    return fightOrSkip();
+  }
+
+  promptFight = promptFight.toLocaleLowerCase();
+
+  if(promptFight === "skip") {
+
+  }
+
+
+  // if player picks "skip" confirm and then stop the loop
+  if (promptFight === "skip" || promptFight === "SKIP") {
+    //confirm player wants to skip
+    var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
+    // if yes (true), leave fight
+    if(confirmSkip) {
+      window.alert(playerInfo.name + "has decided to skip this fight. Goodbye!");
+      // subtract money from playerMoney for skipping
+      playerInfo.playerMoney = playerInfo.money - 10;
+
+      // return true if player wants to leave
+      return true; 
+      shop();
+    }
+  }
+}
+
 var fight = function(enemy) {
     // repeat and execute as long as the enemy-robot is alive
     while (playerInfo.health > 0 && enemy.health > 0) {
+      // ask player if they'd like to fight or skip using fightOrSkip function
+      if (fightOrSkip()); {
+        // if true, leave the fight by breaking the loop
+        break;
+      }
+  var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
       // ask player if they'd like to fight or run
       var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
   
@@ -195,7 +236,7 @@ var playerInfo = {
   else {
     window.alert("You don't have enough money!");
   }
-};
+}
 
 var enemyInfo = [
   {
